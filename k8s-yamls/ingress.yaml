@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: custom-hpa-test-ingress
+  annotations:
+    ingress.gcp.kubernetes.io/pre-shared-cert: wildcard-qca02-ujet-co
+    kubernetes.io/ingress.regional-static-ip-name: qca02-custom-hpa-test-ingress-int-ip
+    kubernetes.io/ingress.class: "gce-internal"
+    kubernetes.io/ingress.allow-http: "false"
+  namespace: custom-hpa-test
+  labels:
+    app: custom-hpa-test
+spec:
+  rules:
+  - host: 'customhpa.qca02.ujet.co'
+    http:
+      paths:
+      - path: /*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: nginx-proxy
+            port:
+              number: 80
+      # - path: /delete
+      #   pathType: ImplementationSpecific
+      #   backend:
+      #     service:
+      #       name: nginx-proxy
+      #       port:
+      #         number: 80
+      # - path: /v2/update
+      #   pathType: ImplementationSpecific
+      #   backend:
+      #     service:
+      #       name: nginx-proxy
+      #       port:
+      #         number: 80
+      # - path: /insert
+      #   pathType: ImplementationSpecific
+      #   backend:
+      #     service:
+      #       name: nginx-proxy
+      #       port:
+      #         number: 80

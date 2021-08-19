@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-hpa-test
+  namespace: custom-hpa-test
+  labels:
+    app: custom-hpa-test
+spec:
+  selector:
+    matchLabels:
+      app: custom-hpa-test
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: custom-hpa-test
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9113"
+    spec:
+      containers:
+        - name: nginx-proxy
+          image: gcr.io/searce-playground/nginx-proxy:v1
+          imagePullPolicy: Always
+          env:
+            - name: PROXY_SVC
+              value: "qca02-crm-server-cip-svc.qca02-crm-server-ns.svc:4050"
+          command:
+            - ./usr/bin/entrypoint.sh
+          ports:
+          - containerPort: 9113
+          livenessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 80
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 80
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+        # - name: nodejs
+        #   image: gcr.io/searce-playground/sample-nodejs:v1
+        #   ports:
+        #   - containerPort: 3000
+        #   livenessProbe:
+        #     httpGet:
+        #       path: /
+        #       port: 3000
+        #     initialDelaySeconds: 10
+        #     timeoutSeconds: 10
+        #   readinessProbe:
+        #     httpGet:
+        #       path: /
+        #       port: 3000
+        #     initialDelaySeconds: 10
+        #     timeoutSeconds: 10
