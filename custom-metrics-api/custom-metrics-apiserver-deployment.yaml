@@ -21,12 +21,13 @@ spec:
       - name: custom-metrics-apiserver
         image: gcr.io/searce-playground/k8s-prometheus-adapter-amd64:v1
         args:
+        - /adapter
         - --secure-port=6443
         - --tls-cert-file=/var/run/serving-cert/serving.crt
         - --tls-private-key-file=/var/run/serving-cert/serving.key
         - --logtostderr=true
         - --prometheus-url=http://prometheus-server.monitoring.svc:80/
-        - --metrics-relist-interval=1m
+        - --metrics-relist-interval=30s
         - --v=10
         - --config=/etc/adapter/config.yaml
         ports:
@@ -38,8 +39,6 @@ spec:
         - mountPath: /etc/adapter/
           name: config
           readOnly: true
-        - mountPath: /tmp
-          name: tmp-vol
       volumes:
       - name: volume-serving-cert
         secret:
@@ -47,5 +46,3 @@ spec:
       - name: config
         configMap:
           name: adapter-config
-      - name: tmp-vol
-        emptyDir: {}

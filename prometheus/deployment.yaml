@@ -112,7 +112,7 @@ spec:
 
 
         imagePullPolicy: IfNotPresent
-        image: "gcr.io/<project_id>/prom-kube-state-metrics-img:v1"
+        image: "gcr.io/searce-playground/prom-kube-state-metrics-img:v1"
         ports:
         - containerPort: 8080
         livenessProbe:
@@ -150,7 +150,7 @@ spec:
       serviceAccountName: prometheus-alertmanager
       containers:
         - name: prometheus-alertmanager
-          image: "gcr.io/<project_id>/prom-alertmanager-img:v1"    
+          image: "gcr.io/searce-playground/prom-alertmanager-img:v1"    
           imagePullPolicy: "IfNotPresent"
           env:
             - name: POD_IP
@@ -181,7 +181,7 @@ spec:
               mountPath: "/data"
               subPath: ""
         - name: prometheus-alertmanager-configmap-reload
-          image: "gcr.io/<project_id>/prom-configmap-reload-img:v1"     
+          image: "gcr.io/searce-playground/prom-configmap-reload-img:v1"     
           imagePullPolicy: "IfNotPresent"
           args:
             - --volume-dir=/etc/config
@@ -227,7 +227,7 @@ spec:
       serviceAccountName: prometheus-pushgateway
       containers:
         - name: prometheus-pushgateway
-          image: "gcr.io/<project_id>/prom-pushgateway-img:v1"
+          image: "gcr.io/searce-playground/prom-pushgateway-img:v1"
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 9091
@@ -273,7 +273,7 @@ spec:
       serviceAccountName: prometheus-server
       containers:
         - name: prometheus-server-configmap-reload
-          image: "gcr.io/<project_id>/prom-configmap-reload-img:v1"
+          image: "gcr.io/searce-playground/prom-configmap-reload-img:v1"
           imagePullPolicy: "IfNotPresent"
           args:
             - --volume-dir=/etc/config
@@ -286,7 +286,7 @@ spec:
               readOnly: true
 
         - name: prometheus-server
-          image: "gcr.io/<project_id>/prometheus-img:v1"
+          image: "gcr.io/searce-playground/prometheus-img:v1"
           imagePullPolicy: "IfNotPresent"
           args:
             - --storage.tsdb.retention.time=15d

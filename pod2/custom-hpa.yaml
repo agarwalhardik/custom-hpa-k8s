@@ -1,15 +1,15 @@
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: custom-hpa-test
+  name: custom-hpa-test-2
   namespace: custom-hpa-test
   labels:
-    app: custom-hpa-test
+    app: custom-hpa-test-2
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: custom-hpa-test
+    name: custom-hpa-test-2
   minReplicas: 1
   maxReplicas: 10
   metrics:
@@ -19,4 +19,4 @@ spec:
           name: nginx_http_requests
         target:
           type: AverageValue
-          averageValue: "10"
+          averageValue: 1000m
