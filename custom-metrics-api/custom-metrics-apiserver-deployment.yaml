@@ -19,7 +19,7 @@ spec:
       serviceAccountName: custom-metrics-apiserver
       containers:
       - name: custom-metrics-apiserver
-        image: gcr.io/searce-playground/k8s-prometheus-adapter-amd64:v1
+        image: gcr.io/<project_id>/k8s-prometheus-adapter-amd64:v1
         args:
         - /adapter
         - --secure-port=6443

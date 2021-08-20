@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: nginx-proxy
-          image: gcr.io/searce-playground/npe:v1
+          image: gcr.io/<project_id>/nginx-prometheus-exporter:v1
           imagePullPolicy: Always
           env:
             - name: PROXY_SVC
@@ -42,7 +42,7 @@ spec:
             initialDelaySeconds: 10
             timeoutSeconds: 10
         - name: nodejs
-          image: gcr.io/searce-playground/nodejs:v1
+          image: gcr.io/<project_id>/nodejs:v1
           ports:
           - containerPort: 3000
           livenessProbe:

@@ -15,7 +15,7 @@ sudo apt install golang-cfssl
 
 PURPOSE="metrics"
 user=$(whoami)
-SSL_SUBJ="/C=US/ST=NY/L=NYC/O=UJET/OU=UJET/CN=metrics-ca.dev.gcp.ujet.xyz/emailAddress=sre@ujet.cx"
+SSL_SUBJ="/C=US/ST=NY/L=NYC/O=ORG/OU=ORG/CN=metrics-ca.dev.gcp.org.xyz/emailAddress=sre@ORG.cx"
 
 mkdir -p /home/$user/${PURPOSE}-certs
 openssl req -x509 -sha256 -new -nodes -days 3650 -newkey rsa:2048 -keyout /home/$user/${PURPOSE}-certs/${PURPOSE}-ca.key -out /home/$user/${PURPOSE}-certs/${PURPOSE}-ca.crt -subj ${SSL_SUBJ}
