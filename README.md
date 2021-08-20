@@ -26,7 +26,7 @@
 
       docker build -t gcr.io/<project-id>/nginx-proxy:<tag> .
     
-      docker push gcr.io/<project-id>/nginx-proxy:<tag>
+      docker push gcr.io/<project-id>/nginx-proxy:<tag> .
 
 ## Create a sample nodejs application
 
@@ -73,23 +73,6 @@ target:
 type: AverageValue
   averageValue: "40" #This value can be either in milliseconds or seconds (1s = 1000m). 
 ```
-
-## Update the static IP in the ingress
-
-7.1] Reserve a static IP in GCP.
-
-7.2] Update Static IP's name in the Ingress.
-
-```
-annotations:
-      kubernetes.io/ingress.regional-static-ip-name: <static IP name>
-```
-
-## Create Firewall Rules
-
-8.1] Create a Firewall rule for custom metrics api server on private GKE cluster to allow master to nodes connectivity.
-
-8.2] Add port 80 (service port of the internal ingress) to GKE custom Firewall rule.
 
 ## Create application deployment
 

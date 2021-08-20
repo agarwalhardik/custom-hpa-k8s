@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: nodejs
   namespace: custom-hpa-test
-  annotations:
-    cloud.google.com/neg: '{"ingress": true}'
   labels:
     app: custom-hpa-test
 spec:

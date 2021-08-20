@@ -21,7 +21,7 @@ spec:
       serviceAccountName: prometheus-node-exporter
       containers:
         - name: prometheus-node-exporter
-          image: "gcr.io/searce-playground/prom-node-exporter-img:v1"
+          image: "gcr.io/<project_id>/image_name"
           imagePullPolicy: "IfNotPresent"
           args:
             - --path.procfs=/host/proc

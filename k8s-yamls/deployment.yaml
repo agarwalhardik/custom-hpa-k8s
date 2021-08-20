@@ -20,11 +20,11 @@ spec:
     spec:
       containers:
         - name: nginx-proxy
-          image: gcr.io/searce-playground/nginx-proxy:v1
+          image: gcr.io/<project_id>/nginx-proxy:v1
           imagePullPolicy: Always
           env:
             - name: PROXY_SVC
-              value: "qca02-crm-server-cip-svc.qca02-crm-server-ns.svc:4050"
+              value: "service_name:port"
           command:
             - ./usr/bin/entrypoint.sh
           ports:
@@ -41,19 +41,19 @@ spec:
               port: 80
             initialDelaySeconds: 10
             timeoutSeconds: 10
-        # - name: nodejs
-        #   image: gcr.io/searce-playground/sample-nodejs:v1
-        #   ports:
-        #   - containerPort: 3000
-        #   livenessProbe:
-        #     httpGet:
-        #       path: /
-        #       port: 3000
-        #     initialDelaySeconds: 10
-        #     timeoutSeconds: 10
-        #   readinessProbe:
-        #     httpGet:
-        #       path: /
-        #       port: 3000
-        #     initialDelaySeconds: 10
-        #     timeoutSeconds: 10
+        - name: nodejs
+          image: gcr.io/<project_id>/sample-nodejs:v1
+          ports:
+          - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
